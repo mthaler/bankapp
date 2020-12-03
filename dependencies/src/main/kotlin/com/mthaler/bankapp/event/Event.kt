@@ -4,5 +4,5 @@ interface Event {
 
     val eventType: String?
 
-    var eventData: Map<String?, Any?>?
+    var eventData: Map<String, Any>?
 }
