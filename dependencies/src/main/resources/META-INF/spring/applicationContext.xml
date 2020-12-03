@@ -1,0 +1,15 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="controller"
+		class="com.mthaler.bankapp.controller.FixedDepositControllerImpl">
+		<constructor-arg>
+			<bean class="com.mthaler.bankapp.service.FixedDepositServiceImpl">
+				<constructor-arg>
+					<bean class="com.mthaler.bankapp.dao.FixedDepositHibernateDao" />
+				</constructor-arg>
+			</bean>
+		</constructor-arg>
+	</bean>
+</beans>
