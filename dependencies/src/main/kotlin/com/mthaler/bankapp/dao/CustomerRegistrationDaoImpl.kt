@@ -12,7 +12,7 @@ class CustomerRegistrationDaoImpl : CustomerRegistrationDao {
     override fun registerCustomer(customerRegistrationDetails: CustomerRegistrationDetails) {}
 
     companion object {
-        private val logger = LogManager
-            .getLogger(CustomerRegistrationDaoImpl::class.java)
+
+        private val logger = LogManager.getLogger(CustomerRegistrationDaoImpl::class.java)
     }
 }

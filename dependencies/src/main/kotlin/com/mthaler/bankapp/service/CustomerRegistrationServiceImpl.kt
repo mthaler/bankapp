@@ -11,6 +11,11 @@ class CustomerRegistrationServiceImpl @ConstructorProperties(
     private val customerRegistrationDetails: CustomerRegistrationDetails,
     private val customerRegistrationDao: CustomerRegistrationDao
 ) : CustomerRegistrationService {
+
+    init {
+        logger.info("Created CustomerRegistrationServiceImpl instance")
+    }
+
     override fun setAccountNumber(accountNumber: String) {
         customerRegistrationDetails.accountNumber = accountNumber
     }
@@ -28,11 +33,7 @@ class CustomerRegistrationServiceImpl @ConstructorProperties(
     }
 
     companion object {
-        private val logger = LogManager
-            .getLogger(CustomerRegistrationServiceImpl::class.java)
-    }
 
-    init {
-        logger.info("Created CustomerRegistrationServiceImpl instance")
+        private val logger = LogManager.getLogger(CustomerRegistrationServiceImpl::class.java)
     }
 }

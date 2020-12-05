@@ -14,8 +14,7 @@ class CustomerRequestDaoImpl : CustomerRequestDao {
     }
 
     companion object {
-        private val logger = LogManager.getLogger(
-            CustomerRequestDaoImpl::class.java
-        )
+
+        private val logger = LogManager.getLogger(CustomerRequestDaoImpl::class.java)
     }
 }

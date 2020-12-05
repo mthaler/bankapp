@@ -12,8 +12,31 @@ import org.springframework.core.io.ClassPathResource
 import java.util.*
 
 class FixedDepositServiceImpl(configFile: String?) : FixedDepositService {
+
     private var fixedDepositDao: FixedDepositDao? = null
     private var eventSender: EventSender? = null
+    
+    init {
+        // --read the appConfig.properties file to know the EventSender
+        // implementation to use
+        val configProperties = ClassPathResource(configFile)
+        if (configProperties.exists()) {
+            val inStream = configProperties.inputStream
+            val properties = Properties()
+            properties.load(inStream)
+            val eventSenderClassString = properties
+                .getProperty(Constants.EVENT_SENDER_CLASS_PROPERTY)
+            if (eventSenderClassString != null) {
+                val eventSenderClass = Class
+                    .forName(eventSenderClassString)
+                eventSender = eventSenderClass.newInstance() as EventSender
+                logger.info("Created EventSender class")
+            } else {
+                logger.info("appConfig.properties file doesn't contain the information about EventSender class")
+            }
+        }
+    }
+
     fun setFixedDepositDao(fixedDepositDao: FixedDepositDao?) {
         this.fixedDepositDao = fixedDepositDao
     }
@@ -37,26 +60,5 @@ class FixedDepositServiceImpl(configFile: String?) : FixedDepositService {
     companion object {
         private val logger = LogManager
             .getLogger(FixedDepositServiceImpl::class.java)
-    }
-
-    init {
-        // --read the appConfig.properties file to know the EventSender
-        // implementation to use
-        val configProperties = ClassPathResource(configFile)
-        if (configProperties.exists()) {
-            val inStream = configProperties.inputStream
-            val properties = Properties()
-            properties.load(inStream)
-            val eventSenderClassString = properties
-                .getProperty(Constants.EVENT_SENDER_CLASS_PROPERTY)
-            if (eventSenderClassString != null) {
-                val eventSenderClass = Class
-                    .forName(eventSenderClassString)
-                eventSender = eventSenderClass.newInstance() as EventSender
-                logger.info("Created EventSender class")
-            } else {
-                logger.info("appConfig.properties file doesn't contain the information about EventSender class")
-            }
-        }
     }
 }
