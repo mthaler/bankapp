@@ -1,23 +1,25 @@
 package com.mthaler.bankapp.domain
 
+import com.mthaler.bankapp.domain.CustomerRequestDetails
 import org.apache.logging.log4j.LogManager
-import java.util.Date
+import java.util.*
 
-data class CustomerRequestDetails(val type: String,
-    val description: String,
-    val category: String,
-    val assignedDepartment: String,
-    val submissionDate: Date,
-    val status: String,
-    val resolutionTimeInDays: String) {
-
-    init {
-        logger.info("Created CustomerRequestDetails instance")
-    }
+class CustomerRequestDetails {
+    var type: String? = null
+    var description: String? = null
+    var category: String? = null
+    var assignedDepartment: String? = null
+    var submissionDate: Date? = null
+    var status: String? = null
+    var resolutionTimeInDays: String? = null
 
     companion object {
         private val logger = LogManager.getLogger(
             CustomerRequestDetails::class.java
         )
+    }
+
+    init {
+        logger.info("Created CustomerRequestDetails instance")
     }
 }

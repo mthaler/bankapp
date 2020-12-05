@@ -12,7 +12,7 @@ class EventSenderSelectorServiceImpl(configFile: String?) {
         val resource = ClassPathResource(configFile)
         val os: OutputStream = FileOutputStream(resource.file)
         val properties = Properties()
-        properties.setProperty(Constants.EVENT_SENDER_CLASS_PROPERTY, "sample.spring.chapter04.bankapp.event.DatabaseEventSender")
+        properties.setProperty(Constants.EVENT_SENDER_CLASS_PROPERTY, "com.mthaler.bankapp.event.DatabaseEventSender")
         properties.store(os, null)
         properties.list(System.out)
         os.flush()

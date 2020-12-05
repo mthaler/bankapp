@@ -15,7 +15,7 @@ class FixedDepositServiceImpl(configFile: String?) : FixedDepositService {
 
     private var fixedDepositDao: FixedDepositDao? = null
     private var eventSender: EventSender? = null
-    
+
     init {
         // --read the appConfig.properties file to know the EventSender
         // implementation to use

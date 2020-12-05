@@ -1,10 +1,8 @@
 package com.mthaler.bankapp.service
 
 import java.beans.ConstructorProperties
-import com.mthaler.bankapp.domain.CustomerRequestDetails
 import com.mthaler.bankapp.dao.CustomerRequestDao
-import com.mthaler.bankapp.service.CustomerRequestService
-import com.mthaler.bankapp.service.CustomerRequestServiceImpl
+import com.mthaler.bankapp.domain.CustomerRequestDetails
 import org.apache.logging.log4j.LogManager
 
 class CustomerRequestServiceImpl @ConstructorProperties("customerRequestDetails", "customerRequestDao") constructor(
