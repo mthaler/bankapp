@@ -16,12 +16,12 @@ object BankApp {
     private val logger = LogManager.getLogger(BankApp::class.java)
     @JvmStatic
     fun main(args: Array<String>) {
+
         val context: ApplicationContext = ClassPathXmlApplicationContext(
             "classpath:META-INF/spring/applicationContext.xml"
         )
 
-        val fixedDepositService = context
-            .getBean("service") as FixedDepositService
+        val fixedDepositService = context.getBean("service") as FixedDepositService
 
         fixedDepositService.createFixedDeposit(
             FixedDepositDetails(
