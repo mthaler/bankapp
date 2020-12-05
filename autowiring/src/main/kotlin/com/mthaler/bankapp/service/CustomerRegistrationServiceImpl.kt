@@ -4,7 +4,6 @@ import com.mthaler.bankapp.domain.CustomerRegistrationDetails
 import com.mthaler.bankapp.dao.CustomerRegistrationDao
 
 class CustomerRegistrationServiceImpl : CustomerRegistrationService {
-
     var customerRegistrationDetails: CustomerRegistrationDetails? = null
     var customerRegistrationDao: CustomerRegistrationDao? = null
 
