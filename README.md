@@ -17,3 +17,7 @@ A refined version of the basic example that uses interfaces and constructor depe
 ### innerbeans
 
 A slightly modified version of the refined bankapp that uses inner beans to define dependencies in applicationContext.xml
+
+## dependencies
+
+In this example FixedDepositService implicitly depends on EventSenderSelectorService because EventSenderSelectorService writes the event sender class to appConfig.properties when it is constructed and FixedDepositService reads the event sender class from appConfig.properties when it is constructed. There are two ways to solve this: either define EventSenderSelectorService first in applicationContext.xml or explicitly specify the dependency using the depends-on attribute. This example uses the depends-on attribute.
