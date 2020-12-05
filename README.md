@@ -21,3 +21,12 @@ A slightly modified version of the refined bankapp that uses inner beans to defi
 ### dependencies
 
 In this example FixedDepositService implicitly depends on EventSenderSelectorService because EventSenderSelectorService writes the event sender class to appConfig.properties when it is constructed and FixedDepositService reads the event sender class from appConfig.properties when it is constructed. There are two ways to solve this: either define EventSenderSelectorService first in applicationContext.xml or explicitly specify the dependency using the depends-on attribute. This example uses the depends-on attribute.
+
+Note: in this example, CustomerRequestServiceImpl always returns the same CustomerRequestDetails object, even though CustomerRequestDetails is prototype scoped. This is because CustomerRequestDetails gets injected into CustomerRequestServiceImpl when CustomerRequestServiceImpl is created. This is certainly not the expected behavior
+when calling the submitRequest method.
+
+### context-aware
+
+This is a refined version of the dependencies example where CustomerRequestServiceImpl implements the ApplicationContextAware interface and submitRequest will create a new CustomerRequestDetails object using the application context everytime it is called.
+
+Note: there are other ways to make the submitRequest method return a new CustomerRequestDetails everytime it is called: using the lookup-method element and the replaced-method element. Using these elements, Spring creates a derived class where the submitRequest method is overriden to return a new instance of the CustomerRequestDetails object everytime it is called. I think using an interface is cleaner.
