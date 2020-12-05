@@ -24,11 +24,9 @@ class FixedDepositServiceImpl(configFile: String?) : FixedDepositService {
             val inStream = configProperties.inputStream
             val properties = Properties()
             properties.load(inStream)
-            val eventSenderClassString = properties
-                .getProperty(Constants.EVENT_SENDER_CLASS_PROPERTY)
+            val eventSenderClassString = properties.getProperty(Constants.EVENT_SENDER_CLASS_PROPERTY)
             if (eventSenderClassString != null) {
-                val eventSenderClass = Class
-                    .forName(eventSenderClassString)
+                val eventSenderClass = Class.forName(eventSenderClassString)
                 eventSender = eventSenderClass.newInstance() as EventSender
                 logger.info("Created EventSender class")
             } else {

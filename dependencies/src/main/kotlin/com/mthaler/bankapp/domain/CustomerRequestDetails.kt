@@ -13,13 +13,13 @@ class CustomerRequestDetails {
     var status: String? = null
     var resolutionTimeInDays: String? = null
 
+    init {
+        logger.info("Created CustomerRequestDetails instance")
+    }
+
     companion object {
         private val logger = LogManager.getLogger(
             CustomerRequestDetails::class.java
         )
-    }
-
-    init {
-        logger.info("Created CustomerRequestDetails instance")
     }
 }

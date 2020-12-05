@@ -6,6 +6,12 @@ class CustomerRegistrationDetails() {
     var accountNumber: String? = null
     private var address: String? = null
     private var cardNumber: String? = null
+
+
+    init {
+        logger.info("Created CustomerRegistrationDetails instance")
+    }
+
     fun setAddress(address: String?) {
         this.address = address
     }
@@ -17,9 +23,5 @@ class CustomerRegistrationDetails() {
     companion object {
         private val logger = LogManager
             .getLogger(CustomerRegistrationDetails::class.java)
-    }
-
-    init {
-        logger.info("Created CustomerRegistrationDetails instance")
     }
 }
