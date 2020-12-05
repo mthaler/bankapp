@@ -30,3 +30,8 @@ when calling the submitRequest method.
 This is a refined version of the dependencies example where CustomerRequestServiceImpl implements the ApplicationContextAware interface and submitRequest will create a new CustomerRequestDetails object using the application context everytime it is called.
 
 Note: there are other ways to make the submitRequest method return a new CustomerRequestDetails everytime it is called: using the lookup-method element and the replaced-method element. Using these elements, Spring creates a derived class where the submitRequest method is overriden to return a new instance of the CustomerRequestDetails object everytime it is called. I think using an interface is cleaner.
+
+### autowiring
+
+This example demonstrates the Spring autowiring feature: Spring figures out dependencies itself using types of constructor arguments, setter arguments etc.
+The downside is that it makes it hard to understand the app structure when looking at applicationContext.xml.
