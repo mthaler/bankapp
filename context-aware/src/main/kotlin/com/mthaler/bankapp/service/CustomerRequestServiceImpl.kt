@@ -2,29 +2,40 @@ package com.mthaler.bankapp.service
 
 import java.beans.ConstructorProperties
 import com.mthaler.bankapp.dao.CustomerRequestDao
+import org.springframework.context.ApplicationContextAware
+import org.springframework.context.ApplicationContext
+import kotlin.Throws
+import org.springframework.beans.BeansException
 import com.mthaler.bankapp.domain.CustomerRequestDetails
 import org.apache.logging.log4j.LogManager
-import org.springframework.context.ApplicationContextAware
 
-class CustomerRequestServiceImpl @ConstructorProperties("customerRequestDetails", "customerRequestDao") constructor(
-    customerRequestDetails: CustomerRequestDetails,
+class CustomerRequestServiceImpl @ConstructorProperties("customerRequestDao") constructor(
     customerRequestDao: CustomerRequestDao
 ) : CustomerRequestService, ApplicationContextAware {
 
-    private val customerRequestDetails: CustomerRequestDetails
     private val customerRequestDao: CustomerRequestDao
+    private lateinit var applicationContext: ApplicationContext
 
     init {
-        logger.info("Created CustomerRequestServiceImpl instance")
-        this.customerRequestDetails = customerRequestDetails
+        logger.info("Created CustomerRequestServiceContextAwareImpl instance")
         this.customerRequestDao = customerRequestDao
     }
 
+    @Throws(BeansException::class)
+    override fun setApplicationContext(applicationContext: ApplicationContext) {
+        this.applicationContext = applicationContext
+    }
+
     override fun submitRequest(requestType: String, requestDescription: String) {
-        // -- create an instance of UserRequestDetails and save it
+        // -- populate CustomerRequestDetails object and save it
+        val customerRequestDetails = applicationContext.getBean(CustomerRequestDetails::class.java)
+        customerRequestDetails.type = requestType
+        customerRequestDetails.description = requestDescription
+        customerRequestDao.submitRequest(customerRequestDetails)
     }
 
     companion object {
-        private val logger = LogManager.getLogger(CustomerRequestServiceImpl::class.java)
+        private val logger = LogManager
+            .getLogger(CustomerRequestServiceImpl::class.java)
     }
 }
