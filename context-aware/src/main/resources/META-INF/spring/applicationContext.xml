@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+	<bean id="service"
+		class="com.mthaler.bankapp.service.FixedDepositServiceImpl" depends-on="eventSenderSelectorService">
+		<property name="fixedDepositDao">
+			<bean class="com.mthaler.bankapp.dao.FixedDepositDaoImpl" />
+		</property>
+		<constructor-arg index="0"
+			value="META-INF/config/appConfig.properties" />
+	</bean>
+
+	<bean id="eventSenderSelectorService"
+		class="com.mthaler.bankapp.service.EventSenderSelectorServiceImpl">
+		<constructor-arg index="0"
+			value="META-INF/config/appConfig.properties" />
+	</bean>
+
+	<bean id="customerRequestService"
+		class="com.mthaler.bankapp.service.CustomerRequestServiceImpl">
+		<constructor-arg name="customerRequestDetails" ref="customerRequestDetails" />
+		<constructor-arg name="customerRequestDao" ref="customerRequestDao" />
+	</bean>
+
+	<bean id="customerRequestDetails"
+		class="com.mthaler.bankapp.domain.CustomerRequestDetails"
+		scope="prototype" />
+
+	<bean id="customerRequestDao"
+		class="com.mthaler.bankapp.dao.CustomerRequestDaoImpl" />
+
+	<bean id="customerRegistrationService"
+		class="com.mthaler.bankapp.service.CustomerRegistrationServiceImpl"
+		scope="prototype">
+		<constructor-arg name="customerRegistrationDetails"
+			ref="customerRegistrationDetails" />
+		<constructor-arg name="customerRegistrationDao" ref="customerRegistrationDao" />
+	</bean>
+
+	<bean id="customerRegistrationDetails"
+		class="com.mthaler.bankapp.domain.CustomerRegistrationDetails"
+		scope="prototype" />
+
+	<bean id="customerRegistrationDao"
+		class="com.mthaler.bankapp.dao.CustomerRegistrationDaoImpl" />
+</beans>
