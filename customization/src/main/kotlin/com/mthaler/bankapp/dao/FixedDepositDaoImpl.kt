@@ -13,7 +13,7 @@ class FixedDepositDaoImpl : FixedDepositDao {
 
     fun initializeDbConnection() {
         logger.info("FixedDepositDaoImpl's initializeDbConnection method invoked")
-        connection = DatabaseConnection.getInstance()
+        connection = DatabaseConnection.instance
     }
 
     override fun createFixedDeposit(fdd: FixedDepositDetails): Boolean {
