@@ -35,3 +35,8 @@ Note: there are other ways to make the submitRequest method return a new Custome
 
 This example demonstrates the Spring autowiring feature: Spring figures out dependencies itself using types of constructor arguments, setter arguments etc.
 The downside is that it makes it hard to understand the app structure when looking at applicationContext.xml.
+
+### customization
+
+This example shows how to execute custom initialization logic after bean properties are set, but before the bean is completely initialized by the Spring container.
+It also shows how to execute custom logic before the bean is destroyed.
