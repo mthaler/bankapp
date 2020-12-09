@@ -5,7 +5,7 @@ import org.apache.logging.log4j.LogManager
 
 class FixedDepositDaoImpl : FixedDepositDao {
 
-    private var connection: DatabaseConnection? = null
+    private lateinit var connection: DatabaseConnection
 
     init {
         logger.info("FixedDepositDaoImpl's constructor invoked")
@@ -24,7 +24,7 @@ class FixedDepositDaoImpl : FixedDepositDao {
 
     fun releaseDbConnection() {
         logger.info("FixedDepositDaoImpl's releaseDbConnection method invoked")
-        connection!!.releaseConnection()
+        connection.releaseConnection()
     }
 
     companion object {
