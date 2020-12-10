@@ -1,29 +1,28 @@
 package com.mthaler.bankapp.service
 
+import com.mthaler.bankapp.common.DependencyResolver
 import com.mthaler.bankapp.dao.FixedDepositDao
 import kotlin.Throws
 import java.lang.Exception
 import com.mthaler.bankapp.domain.FixedDepositDetails
+import com.mthaler.bankapp.common.MyApplicationContext
 import org.apache.logging.log4j.LogManager
 
-class FixedDepositServiceImpl : FixedDepositService {
-
-    private var myFixedDepositDao: FixedDepositDao? = null
-
-    fun setMyFixedDepositDao(myFixedDepositDao: FixedDepositDao?) {
-        logger.info("FixedDepositServiceImpl's setMyFixedDepositDao method invoked")
-        this.myFixedDepositDao = myFixedDepositDao
-    }
-
+class FixedDepositServiceImpl : FixedDepositService, DependencyResolver {
+    private var fixedDepositDao: FixedDepositDao? = null
     @Throws(Exception::class)
     override fun createFixedDeposit(fdd: FixedDepositDetails?) {
         // -- create fixed deposit
-        myFixedDepositDao!!.createFixedDeposit(fdd!!)
+        fixedDepositDao!!.createFixedDeposit(fdd!!)
+    }
+
+    override fun resolveDependency(myApplicationContext: MyApplicationContext?) {
+        logger.info("Resolving dependencies of FixedDepositServiceImpl instance")
+        fixedDepositDao = myApplicationContext!!.getBean(FixedDepositDao::class.java)
     }
 
     companion object {
-        private val logger = LogManager.getLogger(
-            FixedDepositServiceImpl::class.java
-        )
+        private val logger = LogManager
+            .getLogger(FixedDepositServiceImpl::class.java)
     }
 }
