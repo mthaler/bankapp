@@ -7,5 +7,5 @@ import com.mthaler.bankapp.domain.FixedDepositDetails
 interface FixedDepositService {
 
     @Throws(Exception::class)
-    fun createFixedDeposit(fdd: FixedDepositDetails?)
+    fun createFixedDeposit(fdd: FixedDepositDetails)
 }

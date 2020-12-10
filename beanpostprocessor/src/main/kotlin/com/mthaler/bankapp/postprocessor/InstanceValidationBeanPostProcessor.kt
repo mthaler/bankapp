@@ -8,7 +8,13 @@ import com.mthaler.bankapp.common.InstanceValidator
 import org.apache.logging.log4j.LogManager
 
 class InstanceValidationBeanPostProcessor : BeanPostProcessor, Ordered {
+
     private var order = 0
+
+    init {
+        logger.info("Created InstanceValidationBeanPostProcessor instance")
+    }
+
     @Throws(BeansException::class)
     override fun postProcessBeforeInitialization(bean: Any, beanName: String): Any {
         logger.info("InstanceValidationBeanPostProcessor's postProcessBeforeInitialization method invoked for bean " + beanName + " of type " + bean.javaClass)
@@ -35,9 +41,5 @@ class InstanceValidationBeanPostProcessor : BeanPostProcessor, Ordered {
     companion object {
         private val logger = LogManager
             .getLogger(InstanceValidationBeanPostProcessor::class.java)
-    }
-
-    init {
-        logger.info("Created InstanceValidationBeanPostProcessor instance")
     }
 }

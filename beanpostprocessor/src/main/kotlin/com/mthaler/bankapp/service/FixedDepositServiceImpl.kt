@@ -9,11 +9,13 @@ import com.mthaler.bankapp.common.MyApplicationContext
 import org.apache.logging.log4j.LogManager
 
 class FixedDepositServiceImpl : FixedDepositService, DependencyResolver {
-    private var fixedDepositDao: FixedDepositDao? = null
+
+    private lateinit var fixedDepositDao: FixedDepositDao
+
     @Throws(Exception::class)
-    override fun createFixedDeposit(fdd: FixedDepositDetails?) {
+    override fun createFixedDeposit(fdd: FixedDepositDetails) {
         // -- create fixed deposit
-        fixedDepositDao!!.createFixedDeposit(fdd!!)
+        fixedDepositDao.createFixedDeposit(fdd)
     }
 
     override fun resolveDependency(myApplicationContext: MyApplicationContext?) {

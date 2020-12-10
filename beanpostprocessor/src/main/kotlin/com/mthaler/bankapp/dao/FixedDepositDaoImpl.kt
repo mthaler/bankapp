@@ -1,11 +1,12 @@
 package com.mthaler.bankapp.dao
 
+import com.mthaler.bankapp.common.InstanceValidator
 import com.mthaler.bankapp.domain.FixedDepositDetails
 import org.apache.logging.log4j.LogManager
 
-class FixedDepositDaoImpl : FixedDepositDao {
+class FixedDepositDaoImpl : FixedDepositDao, InstanceValidator {
 
-    private lateinit var connection: DatabaseConnection
+    private var connection: DatabaseConnection? = null
 
     init {
         logger.info("FixedDepositDaoImpl's constructor invoked")
@@ -24,7 +25,14 @@ class FixedDepositDaoImpl : FixedDepositDao {
 
     fun releaseDbConnection() {
         logger.info("FixedDepositDaoImpl's releaseDbConnection method invoked")
-        connection.releaseConnection()
+        connection!!.releaseConnection()
+    }
+
+    override fun validateInstance() {
+        logger.info("Validating FixedDepositDaoImpl instance")
+        if (connection == null) {
+            logger.error("Failed to obtain DatabaseConnection instance")
+        }
     }
 
     companion object {

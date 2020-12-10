@@ -9,8 +9,14 @@ import com.mthaler.bankapp.common.DependencyResolver
 import org.apache.logging.log4j.LogManager
 
 class DependencyResolutionBeanPostProcessor : BeanPostProcessor, Ordered {
+
     private var myApplicationContext: MyApplicationContext? = null
     private var order = 0
+
+    init {
+        logger.info("Created DependencyResolutionBeanPostProcessor instance")
+    }
+
     fun setOrder(order: Int) {
         this.order = order
     }
@@ -43,9 +49,5 @@ class DependencyResolutionBeanPostProcessor : BeanPostProcessor, Ordered {
     companion object {
         private val logger = LogManager
             .getLogger(DependencyResolutionBeanPostProcessor::class.java)
-    }
-
-    init {
-        logger.info("Created DependencyResolutionBeanPostProcessor instance")
     }
 }

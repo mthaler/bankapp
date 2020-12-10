@@ -7,6 +7,12 @@ import java.lang.Exception
 import org.apache.logging.log4j.LogManager
 
 class EventSenderFactoryBean : FactoryBean<EventSender>, InitializingBean {
+
+
+    init {
+        logger.info("Created EventSenderFactoryBean")
+    }
+
     @Throws(Exception::class)
     override fun getObject(): EventSender {
         logger.info("getObject method of EventSenderFactoryBean invoked")
@@ -29,9 +35,5 @@ class EventSenderFactoryBean : FactoryBean<EventSender>, InitializingBean {
     companion object {
         private val logger = LogManager
             .getLogger(EventSenderFactoryBean::class.java)
-    }
-
-    init {
-        logger.info("Created EventSenderFactoryBean")
     }
 }
