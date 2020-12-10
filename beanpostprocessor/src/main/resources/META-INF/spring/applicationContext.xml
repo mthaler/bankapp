@@ -1,6 +1,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
-	<bean id="fixedDepositService" class="com.mthaler.bankapp.service.FixedDepositServiceImpl">
-		<property name="myFixedDepositDao" ref="myFixedDepositDao"/>
+	<bean id="fixedDepositService" class="com.mthaler.bankapp.service.FixedDepositServiceImpl"/>
+	<bean id="fixedDepositDao" class="com.mthaler.bankapp.dao.FixedDepositDaoImpl" init-method="initializeDbConnection" destroy-method="releaseDbConnection"/>
+	<bean class="com.mthaler.bankapp.postprocessor.InstanceValidationBeanPostProcessor">
+		<property name="order" value="1"/>
 	</bean>
-	<bean id="myFixedDepositDao" class="com.mthaler.bankapp.dao.FixedDepositDaoImpl" init-method="initializeDbConnection" destroy-method="releaseDbConnection"/>
+	<bean class="com.mthaler.bankapp.postprocessor.DependencyResolutionBeanPostProcessor">
+		<property name="myApplicationContext" ref="myApplicationContext"/>
+		<property name="order" value="0"/>
+	</bean>
+	<bean id="myApplicationContext" class="com.mthaler.bankapp.common.MyApplicationContext"/>
+	<bean id="eventSenderFactory" class="com.mthaler.bankapp.factory.EventSenderFactoryBean"/>
 </beans>
