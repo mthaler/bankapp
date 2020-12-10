@@ -3,16 +3,16 @@ package com.mthaler.bankapp
 import kotlin.Throws
 import java.lang.Exception
 import kotlin.jvm.JvmStatic
-import org.springframework.context.ApplicationContext
 import org.springframework.context.support.ClassPathXmlApplicationContext
 import com.mthaler.bankapp.service.FixedDepositService
 import com.mthaler.bankapp.domain.FixedDepositDetails
+import org.springframework.context.ConfigurableApplicationContext
 
 object BankApp {
     @Throws(Exception::class)
     @JvmStatic
     fun main(args: Array<String>) {
-        val context: ApplicationContext = ClassPathXmlApplicationContext(
+        val context: ConfigurableApplicationContext = ClassPathXmlApplicationContext(
             "classpath:META-INF/spring/applicationContext.xml"
         )
         val fixedDepositService = context
@@ -23,5 +23,8 @@ object BankApp {
                 12, "someemail@somedomain.com"
             )
         )
+        context.getBean("eventSenderFactory");
+        context.getBean("eventSenderFactory");
+        context.close();
     }
 }
