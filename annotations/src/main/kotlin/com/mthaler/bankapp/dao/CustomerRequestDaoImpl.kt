@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository
 
 @Repository(value = "customerRequestDao")
 class CustomerRequestDaoImpl : CustomerRequestDao {
-    
+
     init {
         logger.info("Created CustomerRequestDaoImpl instance")
     }
