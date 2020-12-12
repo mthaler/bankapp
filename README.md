@@ -40,3 +40,7 @@ The downside is that it makes it hard to understand the app structure when looki
 
 This example shows how to execute custom initialization logic after bean properties are set, but before the bean is completely initialized by the Spring container.
 It also shows how to execute custom logic before the bean is destroyed.
+
+### beanpostprocessor
+
+This example shows how to use a bean post processor to interact with newly created beans before or after their initialization method is invodked.
